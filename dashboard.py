@@ -22,8 +22,8 @@ if not st.session_state["login"]:
     login()
     st.stop()
 
-st.title("WIGO MOTORS S.A.C.")                      
-st.subheader("Buscador comercial") 
+st.title("WIGO MOTORS S.A.C. 🚗 ")                      
+st.subheader("🔎 Buscador comercial") 
 
 st.sidebar.success(f"Bienvenido: {st.session_state['usuario']}")
 
