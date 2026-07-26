@@ -8,8 +8,8 @@ def login():
     st.title("🔐 WIGO MOTORS S.A.C.")
     st.subheader("Inicio de sesión")
 
-    usuario = st.text_input("Usuario")
-    password = st.text_input("Contraseña", type="password")
+    usuario = st.text_input(" 👤 Usuario")
+    password = st.text_input("🔑 Contraseña", type="password")
 
     if st.button("Ingresar"):
 
