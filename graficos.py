@@ -15,7 +15,7 @@ def grafico_ventas(df):
         ventas,
         x = "marca",
         y = "cantidad",
-        title = "Ventas por Marca"
+        title = " 📈 Ventas por Marca"
     )
     
     return grafico01
@@ -32,7 +32,7 @@ def grafico_promedio(df):
         promedio,
         x = "marca",
         y = "precio_venta",       
-        title = "Precio promedio por marca"
+        title = "💵 Precio promedio por marca"
     )
     
     return grafico02
@@ -54,7 +54,7 @@ def grafico_participacion(df):
         participacion,
         names="marca",
         values="cantidad",
-        title="Participación por Marca",
+        title="🎯 Participación por Marca",
         hole=0.45
     )
 
