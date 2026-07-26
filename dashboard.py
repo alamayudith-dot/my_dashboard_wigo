@@ -114,3 +114,11 @@ st.plotly_chart(
     use_container_width=True,
     key="grafico_promedio"
 )
+
+st.plotly_chart(
+    grafico_participacion(df_filtrado),
+    use_container_width=True
+)
+
+
+
