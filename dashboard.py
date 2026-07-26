@@ -25,14 +25,14 @@ if not st.session_state["login"]:
 st.title("WIGO MOTORS S.A.C. 🚗 ")                      
 st.subheader("📊 Dashboard comercial") 
 
-st.sidebar.success(f"Bienvenido: {st.session_state['usuario']}")
+st.sidebar.success(f" 👋 Bienvenido: {st.session_state['usuario']}")
 
 if st.sidebar.button("Cerrar sesión"):
 
     st.session_state.clear()
     st.rerun()
 
-st.sidebar.header("Buscador")
+st.sidebar.header("🔎 Buscador")
 tipo_busqueda = st.sidebar.selectbox("Seleccione tipo de búsqueda", ["Marca", "Asesor comercial", "Sede"])  
 
 
