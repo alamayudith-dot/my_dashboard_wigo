@@ -23,7 +23,7 @@ if not st.session_state["login"]:
     st.stop()
 
 st.title("WIGO MOTORS S.A.C. 🚗 ")                      
-st.subheader("🔎 Buscador comercial") 
+st.subheader("📊 Dashboard comercial") 
 
 st.sidebar.success(f"Bienvenido: {st.session_state['usuario']}")
 
@@ -43,15 +43,15 @@ df_filtrado = df.copy()     # Haciendo una copia del DataFrame
 # FILTRO POR MARCA:
 
 
-if tipo_busqueda == "Marca":
+if tipo_busqueda == "🚗 Marca":
     valor = st.sidebar.selectbox("Seleccionar marca", sorted(df["marca"].unique())) # Mostrar las marcas disponibles y sin repetir
     df_filtrado = df[df["marca"] == valor]                                   # Filtrar búsqueda por marca  
     
-elif tipo_busqueda == "Asesor comercial":
+elif tipo_busqueda == "👨‍💼 Asesor comercial":
     valor = st.sidebar.selectbox("Seleccionar asesor", sorted(df["asesor_comercial"].unique())) # Mostrar las marcas disponibles y sin repetir
     df_filtrado = df[df["asesor_comercial"] == valor]                                   # Filtrar búsqueda por marca  
     
-elif tipo_busqueda == "Sede":
+elif tipo_busqueda == "🏢 Sede":
     valor = st.sidebar.selectbox("Seleccionar sede", sorted(df["tienda"].unique())) # Mostrar las marcas disponibles y sin repetir
     df_filtrado = df[df["tienda"] == valor]                                   # Filtrar búsqueda por marca  
 
@@ -63,7 +63,7 @@ precio_min = int(df["precio_venta"].min())
 precio_max = int(df["precio_venta"].max())
 
 rango_precio = st.sidebar.slider(
-    "Rango de precio (S/)",
+    "💰 Rango de precio (S/)",
     min_value=precio_min,
     max_value=precio_max,
     value=(precio_min, precio_max),
