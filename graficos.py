@@ -63,10 +63,4 @@ def grafico_participacion(df):
         textinfo="percent+label"
     )
 
-    grafico03.update_layout(
-        title_x=0.5,
-        legend_title="Marca"
-    )
-
     return grafico03
-
