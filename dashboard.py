@@ -54,7 +54,26 @@ elif tipo_busqueda == "Asesor comercial":
 elif tipo_busqueda == "Sede":
     valor = st.sidebar.selectbox("Seleccionar sede", sorted(df["tienda"].unique())) # Mostrar las marcas disponibles y sin repetir
     df_filtrado = df[df["tienda"] == valor]                                   # Filtrar búsqueda por marca  
-    
+
+# =====================================
+# FILTRO POR RANGO DE PRECIOS
+# =====================================
+
+precio_min = int(df["precio_venta"].min())
+precio_max = int(df["precio_venta"].max())
+
+rango_precio = st.sidebar.slider(
+    "Rango de precio (S/)",
+    min_value=precio_min,
+    max_value=precio_max,
+    value=(precio_min, precio_max),
+    step=1000
+)
+
+df_filtrado = df_filtrado[
+    (df_filtrado["precio_venta"] >= rango_precio[0]) &
+    (df_filtrado["precio_venta"] <= rango_precio[1])
+]
 
 
 # MOSTRAR RESULTADOS:
