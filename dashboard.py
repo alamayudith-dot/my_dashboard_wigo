@@ -43,15 +43,15 @@ df_filtrado = df.copy()     # Haciendo una copia del DataFrame
 # FILTRO POR MARCA:
 
 
-if tipo_busqueda == "🚗 Marca":
+if tipo_busqueda == "Marca":
     valor = st.sidebar.selectbox("Seleccionar marca", sorted(df["marca"].unique())) # Mostrar las marcas disponibles y sin repetir
     df_filtrado = df[df["marca"] == valor]                                   # Filtrar búsqueda por marca  
     
-elif tipo_busqueda == "👨‍💼 Asesor comercial":
+elif tipo_busqueda == "Asesor comercial":
     valor = st.sidebar.selectbox("Seleccionar asesor", sorted(df["asesor_comercial"].unique())) # Mostrar las marcas disponibles y sin repetir
     df_filtrado = df[df["asesor_comercial"] == valor]                                   # Filtrar búsqueda por marca  
     
-elif tipo_busqueda == "🏢 Sede":
+elif tipo_busqueda == "Sede":
     valor = st.sidebar.selectbox("Seleccionar sede", sorted(df["tienda"].unique())) # Mostrar las marcas disponibles y sin repetir
     df_filtrado = df[df["tienda"] == valor]                                   # Filtrar búsqueda por marca  
 
