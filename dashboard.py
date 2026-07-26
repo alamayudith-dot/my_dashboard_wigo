@@ -2,20 +2,35 @@ import streamlit as st
 from Conexion import cargar_datos
 from Indicadores import *     # * indica todos las variables uqe estan dentro de la funcion indicadores 
 from graficos import *
+from auth import login
 
+@st.cache_data
+def obtener_datos():
+    return cargar_datos()
 
-df=cargar_datos()    #UTILIZANDO LA FUNCION  QUE NOS DEVUELVE EL DATA FRAME
+df = obtener_datos()    #UTILIZANDO LA FUNCION  QUE NOS DEVUELVE EL DATA FRAME
 
 # CONFIGURACIÓN DE DASHBOARD CON STREAMLIT:
 
 
 st.set_page_config(page_title = "Wigo Motors", 
                    layout="wide")      
+if "login" not in st.session_state:
+    st.session_state["login"] = False
 
+if not st.session_state["login"]:
+    login()
+    st.stop()
 
 st.title("WIGO MOTORS S.A.C.")                      
 st.subheader("Buscador comercial") 
 
+st.sidebar.success(f"Bienvenido: {st.session_state['usuario']}")
+
+if st.sidebar.button("Cerrar sesión"):
+
+    st.session_state.clear()
+    st.rerun()
 
 st.sidebar.header("Buscador")
 tipo_busqueda = st.sidebar.selectbox("Seleccione tipo de búsqueda", ["Marca", "Asesor comercial", "Sede"])  
@@ -29,15 +44,15 @@ df_filtrado = df.copy()     # Haciendo una copia del DataFrame
 
 
 if tipo_busqueda == "Marca":
-    valor = st.sidebar.selectbox("Seleccionar marca", df["marca"].unique()) # Mostrar las marcas disponibles y sin repetir
+    valor = st.sidebar.selectbox("Seleccionar marca", sorted(df["marca"].unique())) # Mostrar las marcas disponibles y sin repetir
     df_filtrado = df[df["marca"] == valor]                                   # Filtrar búsqueda por marca  
     
 elif tipo_busqueda == "Asesor comercial":
-    valor = st.sidebar.selectbox("Seleccionar asesor", df["asesor_comercial"].unique()) # Mostrar las marcas disponibles y sin repetir
+    valor = st.sidebar.selectbox("Seleccionar asesor", sorted(df["asesor_comercial"].unique())) # Mostrar las marcas disponibles y sin repetir
     df_filtrado = df[df["asesor_comercial"] == valor]                                   # Filtrar búsqueda por marca  
     
 elif tipo_busqueda == "Sede":
-    valor = st.sidebar.selectbox("Seleccionar sede", df["tienda"].unique()) # Mostrar las marcas disponibles y sin repetir
+    valor = st.sidebar.selectbox("Seleccionar sede", sorted(df["tienda"].unique())) # Mostrar las marcas disponibles y sin repetir
     df_filtrado = df[df["tienda"] == valor]                                   # Filtrar búsqueda por marca  
     
 
@@ -46,7 +61,11 @@ elif tipo_busqueda == "Sede":
 
 
 st.success(f"Registros encontrados: {len(df_filtrado)}")        # Mostrar la cantidad de filas encontradas (color verde)
-st.dataframe(df_filtrado)
+st.dataframe(
+    df_filtrado,
+    use_container_width=True,
+    hide_index=True
+)
 
 
 # INDICADORES GENERALES:
@@ -65,5 +84,13 @@ c5, c6, c7, c8 = st.columns(4)
 c5.metric("Precio más alto", f"S/{precio_maximo(df_filtrado):,.2f}")
 c6.metric("Precio más bajo", f"S/{precio_minimo(df_filtrado):,.2f}")
 
-st.plotly_chart(grafico_ventas(df_filtrado))  # Mostrar el gráfico en el Dashboard
-st.plotly_chart(grafico_promedio(df_filtrado))
+st.plotly_chart(
+    grafico_ventas(df_filtrado),
+    use_container_width=True
+)  # Mostrar el gráfico en el Dashboard
+
+
+st.plotly_chart(
+    grafico_ventas(df_filtrado),
+    use_container_width=True
+)
