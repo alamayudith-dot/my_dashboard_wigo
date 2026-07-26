@@ -86,11 +86,12 @@ c6.metric("Precio más bajo", f"S/{precio_minimo(df_filtrado):,.2f}")
 
 st.plotly_chart(
     grafico_ventas(df_filtrado),
-    use_container_width=True
-)  # Mostrar el gráfico en el Dashboard
-
+    use_container_width=True,
+    key="grafico_ventas"
+)
 
 st.plotly_chart(
-    grafico_ventas(df_filtrado),
-    use_container_width=True
+    grafico_promedio(df_filtrado),
+    use_container_width=True,
+    key="grafico_promedio"
 )
